@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.server.reactive.ServerHttpRequest;
+import org.springframework.http.server.reactive.ServerHttpRequestDecorator;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
@@ -44,7 +45,7 @@ public class JwtFilter implements WebFilter {
         String authorizationHeader = request.getHeaders().getFirst(HttpHeaders.AUTHORIZATION);
         if(authorizationHeader == null || !authorizationHeader.startsWith("Bearer ")) {
 //            return chain.filter(exchange);
-            onError(exchange, "No Authorization Header Found", HttpStatus.UNAUTHORIZED);
+            return onError(exchange, "No Authorization Header Found", HttpStatus.UNAUTHORIZED);
         }
 
         String jwt = jwtUtil.substringToken(authorizationHeader);
@@ -57,9 +58,21 @@ public class JwtFilter implements WebFilter {
             Long userId = Long.valueOf(claims.getSubject());
 
             if (userId != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-                return chain.filter(exchange.mutate().request(
-                        request.mutate().header("userId", userId.toString()).build())
-                        .build());
+                ServerHttpRequest decoratedRequest = new ServerHttpRequestDecorator(request) {
+                    @Override
+                    public HttpHeaders getHeaders() {
+                        HttpHeaders headers = new HttpHeaders();
+                        headers.putAll(super.getHeaders());
+                        headers.add("userId", Long.toString(userId));
+                        return headers;
+                    }
+                };
+
+                ServerWebExchange mutatedExchange = exchange.mutate()
+                        .request(decoratedRequest)
+                        .build();
+
+                return chain.filter(mutatedExchange);
             } else {
                 return onError(exchange, "Invalid user ID", HttpStatus.UNAUTHORIZED);
             }
