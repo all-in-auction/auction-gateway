@@ -36,8 +36,8 @@ eureka:
       defaultZone: http://${EUREKA_HOST}:8761/eureka
 
   instance:
-    instance-id: ${spring.application.name}:8080
     prefer-ip-address: true
+    ip-address: ${EC2_PRIVATE_IP}
 
 jwt:
   secret:
