@@ -18,7 +18,7 @@ spring:
 #          uri: http://localhost:8080/api/
           uri: lb://points-service
           predicates:
-            - Path=api/v1/points/**, /api/v2/points/**
+            - Path=api/v1/points/**, /api/v2/points/**, /payment/**
           filters:
 #            - AddRequestHeader=Authorization,Bearer {token}
 
