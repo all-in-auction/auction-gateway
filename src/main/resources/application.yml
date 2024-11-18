@@ -56,3 +56,5 @@ management:
 logging:
   level:
     org.springframework.security: DEBUG
+    org.springframework.cloud.gateway: TRACE
+    org.springframework.http: DEBUG
