@@ -30,6 +30,8 @@ spring:
 
       httpclient:
         max-header-size: 16384
+        connect-timeout: 10000  # 10초
+        response-timeout: 60000 # 60초
 
 
 eureka:
