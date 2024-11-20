@@ -31,7 +31,8 @@ public class SecurityConfig {
                                 "/actuator/health",
                                 "/health",
                                 "/swagger-ui.html",
-                                "/swagger-ui/index.html"
+                                "/swagger-ui/index.html",
+                                "/swagger-ui/**"
                         ).permitAll()
                         .pathMatchers("/api/v2/admin/**").hasAuthority("ADMIN")
                         .anyExchange().authenticated()
