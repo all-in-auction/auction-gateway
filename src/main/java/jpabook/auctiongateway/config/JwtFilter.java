@@ -95,6 +95,8 @@ public class JwtFilter implements WebFilter {
                 path.equals("/actuator/prometheus") ||
                 path.equals("/api/v1/points/buy/confirm") ||
                 path.equals("/swagger-ui/index.html") ||
+                path.equals("/v3/api-docs") ||
+                path.equals("/api/v1/points/v3/api-docs") ||
                 path.equals("/swagger-ui.html");
     }
 

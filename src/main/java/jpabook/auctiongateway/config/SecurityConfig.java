@@ -34,7 +34,9 @@ public class SecurityConfig {
                                 "/swagger-ui/index.html",
                                 "/swagger-ui/**",
                                 "/v3/api-docs/**",
-                                "/api/v1/points/v3/api-docs/**"
+                                "/v3/api-docs",
+                                "/api/v1/points/v3/api-docs/**",
+                                "/api/v1/points/v3/api-docs"
                         ).permitAll()
                         .pathMatchers("/api/v2/admin/**").hasAuthority("ADMIN")
                         .anyExchange().authenticated()
