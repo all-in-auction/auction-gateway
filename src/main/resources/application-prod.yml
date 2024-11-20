@@ -9,14 +9,10 @@ spring:
           uri: lb://points-service
           predicates:
             - Path=/api/v1/points/**, /api/v2/points/**, /payment/**, /points/**, /style.css
-          filters:
-            - RewritePath=/points/(?<segment>.*), /$\{segment}
         - id: auction-service
           uri: lb://auction-service
           predicates:
             - Path=/**
-          filters:
-            - RewritePath=/auction/(?<segment>.*), /$\{segment}
       httpclient:
         max-header-size: 16384
         connect-timeout: 10000  # 10초
