@@ -33,6 +33,7 @@ eureka:
 
 springdoc:
   swagger-ui:
+    path: /swagger-ui.html
     urls:
       - name: Auction Service
         url: http://${EC2_PRIVATE_IP}:8080/auction/v3/api-docs
