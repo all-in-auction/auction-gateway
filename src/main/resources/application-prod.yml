@@ -27,6 +27,16 @@ eureka:
     prefer-ip-address: true
     ip-address: ${EC2_PRIVATE_IP}
 
+springdoc:
+  swagger-ui:
+    urls[0]:
+      name: Auction Service
+      url: http://${EC2_PRIVATE_IP}:8080/v3/api-docs
+    urls[1]:
+      name: Point Service
+      url: http://localhost:8080/api/v1/points/v3/api-docs
+  use-root-path: true # 바로 스웨거 주소로 안내
+
 jwt:
   secret:
     key: ${JWT_SECRET_KEY}

@@ -6,12 +6,12 @@ spring:
           enabled: true
       routes:
         - id: points-service
-          uri: http://localhost:8080/api/
+          uri: http://localhost:8081/api/
           predicates:
             - Path=/api/v1/points/**, /api/v2/points/**, /payment/**, /style.css
 
         - id: auction-service
-          uri: http://localhost:8080
+          uri: http://localhost:8082
           predicates:
             - Path=/**
 
@@ -29,6 +29,14 @@ eureka:
   instance:
     prefer-ip-address: true
     ip-address: ${EC2_PRIVATE_IP}
+
+springdoc:
+  swagger-ui:
+    urls:
+      - url: http://localhost:8081/v3/api-docs
+        name: Auction Service
+      - url: http://localhost:8082/v3/api-docs
+        name: Point Service
 
 jwt:
   secret:
