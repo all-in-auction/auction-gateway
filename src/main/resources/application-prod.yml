@@ -1,0 +1,46 @@
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: points-service
+          uri: lb://points-service
+          predicates:
+            - Path=/api/v1/points/**, /api/v2/points/**, /payment/**, /style.css
+        - id: auction-service
+          uri: lb://auction-service
+          predicates:
+            - Path=/**
+      httpclient:
+        max-header-size: 16384
+        connect-timeout: 10000  # 10초
+        response-timeout: 60000 # 60초
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://${EUREKA_HOST}:8761/eureka
+
+  instance:
+    prefer-ip-address: true
+    ip-address: ${EC2_PRIVATE_IP}
+
+jwt:
+  secret:
+    key: ${JWT_SECRET_KEY}
+
+server:
+  port: 8080
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+logging:
+  level:
+    org.springframework.security: DEBUG
+    org.springframework.cloud.gateway: TRACE
+    org.springframework.http: DEBUG
