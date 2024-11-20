@@ -30,7 +30,7 @@ public class SecurityConfig {
                                 "/api/v2/auctions/elasticsearch",
                                 "/actuator/health",
                                 "/health",
-                                "/swagger-ui/index.html"
+                                "/swagger-ui.html"
                         ).permitAll()
                         .pathMatchers("/api/v2/admin/**").hasAuthority("ADMIN")
                         .anyExchange().authenticated()
