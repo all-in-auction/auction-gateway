@@ -5,11 +5,6 @@ spring:
         locator:
           enabled: true
       routes:
-        - id: swagger-ui
-          uri: http://localhost:8080  # Swagger UI 제공
-          predicates:
-            - Path=/swagger-ui.html
-            - Path=/swagger-ui/**
         - id: points-service
           uri: lb://points-service
           predicates:
@@ -19,7 +14,7 @@ spring:
         - id: auction-service
           uri: lb://auction-service
           predicates:
-            - Path=/auction/**, /api/**
+            - Path=/**
           filters:
             - RewritePath=/auction/(?<segment>.*), /$\{segment}
       httpclient:
@@ -35,16 +30,6 @@ eureka:
   instance:
     prefer-ip-address: true
     ip-address: ${EC2_PRIVATE_IP}
-
-springdoc:
-  swagger-ui:
-    path: /swagger-ui.html
-    urls:
-      - name: Auction Service
-        url: http://${EC2_PRIVATE_IP}:8080/auction/v3/api-docs
-      - name: Point Service
-        url: http://${EC2_PRIVATE_IP}:8080/points/v3/api-docs
-
 
 jwt:
   secret:
