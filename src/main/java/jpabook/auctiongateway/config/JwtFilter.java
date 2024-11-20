@@ -86,6 +86,7 @@ public class JwtFilter implements WebFilter {
                 path.startsWith("/swagger-ui/") ||
                 path.startsWith("/v3/api-docs/") ||
                 path.startsWith("/api/v1/points/v3/api-docs/") ||
+                path.startsWith("/api/v1/points/swagger-ui/") ||
                 path.equals("/error") ||
                 path.equals("/style.css") ||
                 path.startsWith("/api/v2/auctions/search") ||
@@ -97,6 +98,7 @@ public class JwtFilter implements WebFilter {
                 path.equals("/swagger-ui/index.html") ||
                 path.equals("/v3/api-docs") ||
                 path.equals("/api/v1/points/v3/api-docs") ||
+                path.equals("/api/v1/points/swagger-ui/index.html") ||
                 path.equals("/swagger-ui.html");
     }
 
