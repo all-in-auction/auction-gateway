@@ -90,7 +90,8 @@ public class JwtFilter implements WebFilter {
                 path.equals("/actuator/health") ||
                 path.equals("/health") ||
                 path.equals("/actuator/prometheus") ||
-                path.equals("/api/v1/points/buy/confirm");
+                path.equals("/api/v1/points/buy/confirm") ||
+                path.equals("/swagger-ui/index.html");
     }
 
     private Mono<Void> onError(ServerWebExchange exchange, String err, HttpStatus httpStatus) {
