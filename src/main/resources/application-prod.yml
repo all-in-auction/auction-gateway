@@ -5,6 +5,10 @@ spring:
         locator:
           enabled: true
       routes:
+        - id: swagger-ui
+          uri: http://localhost:8080  # 게이트웨이 자체가 요청을 처리
+          predicates:
+            - Path=/swagger-ui.html
         - id: points-service
           uri: lb://points-service
           predicates:
