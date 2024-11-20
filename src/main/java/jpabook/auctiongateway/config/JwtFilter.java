@@ -87,6 +87,7 @@ public class JwtFilter implements WebFilter {
                 path.startsWith("/v3/api-docs/") ||
                 path.startsWith("/points/") ||
                 path.startsWith("/auction/") ||
+                path.startsWith("/webjars/") ||
                 path.equals("/error") ||
                 path.equals("/style.css") ||
                 path.startsWith("/api/v2/auctions/search") ||

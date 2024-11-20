@@ -35,7 +35,8 @@ public class SecurityConfig {
                                 "/v3/api-docs/**",
                                 "/v3/api-docs",
                                 "/points/**",
-                                "/auction/**"
+                                "/auction/**",
+                                "/webjars/**"
                         ).permitAll()
                         .pathMatchers("/api/v2/admin/**").hasAuthority("ADMIN")
                         .anyExchange().authenticated()
