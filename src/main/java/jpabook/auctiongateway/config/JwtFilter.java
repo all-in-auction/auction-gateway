@@ -98,7 +98,7 @@ public class JwtFilter implements WebFilter {
                 path.equals("/swagger-ui/index.html") ||
                 path.equals("/v3/api-docs") ||
                 path.equals("/api/v1/points/v3/api-docs") ||
-                path.equals("/api/v1/points/swagger-ui/index.html") ||
+                path.equals("/api/v1/points/swagger-ui") ||
                 path.equals("/swagger-ui.html");
     }
 
