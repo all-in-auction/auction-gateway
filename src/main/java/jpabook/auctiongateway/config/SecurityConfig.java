@@ -32,7 +32,9 @@ public class SecurityConfig {
                                 "/health",
                                 "/swagger-ui.html",
                                 "/swagger-ui/index.html",
-                                "/swagger-ui/**"
+                                "/swagger-ui/**",
+                                "/v3/api-docs/**",
+                                "/api/v1/points/v3/api-docs/**"
                         ).permitAll()
                         .pathMatchers("/api/v2/admin/**").hasAuthority("ADMIN")
                         .anyExchange().authenticated()

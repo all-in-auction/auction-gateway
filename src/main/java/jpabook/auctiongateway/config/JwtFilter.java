@@ -84,6 +84,8 @@ public class JwtFilter implements WebFilter {
         return path.startsWith("/api/v1/auth/") ||
                 path.startsWith("/payment/") ||
                 path.startsWith("/swagger-ui/") ||
+                path.startsWith("/v3/api-docs/**") ||
+                path.startsWith("/api/v1/points/v3/api-docs/**") ||
                 path.equals("/error") ||
                 path.equals("/style.css") ||
                 path.startsWith("/api/v2/auctions/search") ||
