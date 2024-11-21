@@ -37,9 +37,7 @@ public class SecurityConfig {
                                 "/swagger-ui/index.html",
                                 "/webjars/swagger-ui/o",
                                 "/v3/api-docs/swagger-config",
-                                "/*/swagger-ui/index.html",
-                                "/points/**",
-                                "/auction/**"
+                                "/*/swagger-ui/index.html"
                         ).permitAll()
                         .pathMatchers("/api/v2/admin/**").hasAuthority("ADMIN")
                         .anyExchange().authenticated()
