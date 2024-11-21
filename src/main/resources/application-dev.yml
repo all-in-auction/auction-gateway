@@ -8,12 +8,16 @@ spring:
         - id: points-service
           uri: http://localhost:8081/api/
           predicates:
-            - Path=/api/v1/points/**, /api/v2/points/**, /payment/**, /style.css
+            - Path=/api/v1/points/**, /api/v2/points/**, /payment/**, /style.css, /points-service/v3/api-docs
+          filters:
+            - RewritePath=/points-service/(?<segment>.*), /$\{segment}
 
         - id: auction-service
           uri: http://localhost:8082
           predicates:
-            - Path=/**
+            - Path= /auction-service/v3/api-docs, /**
+          filters:
+            - RewritePath=/auction-service/(?<segment>.*), /$\{segment}
 
       httpclient:
         max-header-size: 16384
@@ -29,6 +33,17 @@ eureka:
   instance:
     prefer-ip-address: true
     ip-address: ${EC2_PRIVATE_IP}
+
+springdoc:
+  swagger-ui:
+    config-url: /api-docs/swagger-config
+    urls[0]:
+      name: Auction Service
+      url: /auction-service/v3/api-docs
+    urls[1]:
+      name: Points Service
+      url: /points-service/v3/api-docs
+    use-root-path: true
 
 jwt:
   secret:

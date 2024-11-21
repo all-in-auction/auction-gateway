@@ -84,7 +84,7 @@ public class JwtFilter implements WebFilter {
         return path.startsWith("/api/v1/auth/") ||
                 path.startsWith("/payment/") ||
                 path.startsWith("/swagger-ui/") ||
-                path.startsWith("/v3/api-docs/") ||
+                path.startsWith("/v3/api-docs") ||
                 path.startsWith("/points/") ||
                 path.startsWith("/auction/") ||
                 path.equals("/error") ||
@@ -95,8 +95,9 @@ public class JwtFilter implements WebFilter {
                 path.equals("/health") ||
                 path.equals("/actuator/prometheus") ||
                 path.equals("/api/v1/points/buy/confirm") ||
-                path.equals("/v3/api-docs") ||
-                path.equals("/swagger-ui.html");
+                path.equals("/swagger-ui.html") ||
+                path.matches("^/[^/]+/v3/api-docs(/.*)?$") ||
+                path.matches("^/[^/]+/swagger-ui/index.html$");
     }
 
     private Mono<Void> onError(ServerWebExchange exchange, String err, HttpStatus httpStatus) {

@@ -30,10 +30,14 @@ public class SecurityConfig {
                                 "/api/v2/auctions/elasticsearch",
                                 "/actuator/health",
                                 "/health",
-                                "/swagger-ui.html",
-                                "/swagger-ui/**",
+                                "/*/v3/api-docs/**",
                                 "/v3/api-docs/**",
                                 "/v3/api-docs",
+                                "/swagger-ui/**",
+                                "/swagger-ui/index.html",
+                                "/webjars/swagger-ui/o",
+                                "/v3/api-docs/swagger-config",
+                                "/*/swagger-ui/index.html",
                                 "/points/**",
                                 "/auction/**"
                         ).permitAll()
