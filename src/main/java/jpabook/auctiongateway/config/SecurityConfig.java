@@ -60,6 +60,8 @@ public class SecurityConfig {
             if ("/".equals(exchange.getRequest().getPath().value())) {
                 exchange.getResponse().setStatusCode(HttpStatus.FOUND);
                 exchange.getResponse().getHeaders().setLocation(URI.create("/swagger-ui/index.html"));
+                exchange.getResponse().getHeaders().add("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
+                exchange.getResponse().getHeaders().add("Pragma", "no-cache");
                 return exchange.getResponse().setComplete();
             }
             return chain.filter(exchange);
