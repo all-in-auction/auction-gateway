@@ -92,6 +92,7 @@ public class JwtFilter implements WebFilter {
                 path.equals("/actuator/health") ||
                 path.equals("/health") ||
                 path.equals("/actuator/prometheus") ||
+                path.equals("/") ||
                 path.equals("/api/v1/points/buy/confirm") ||
                 path.equals("/swagger-ui.html") ||
                 path.matches("^/[^/]+/v3/api-docs(/.*)?$") ||

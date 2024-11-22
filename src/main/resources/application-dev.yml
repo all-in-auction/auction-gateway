@@ -43,7 +43,6 @@ springdoc:
     urls[1]:
       name: Points Service
       url: /points-service/v3/api-docs
-    use-root-path: true
 
 jwt:
   secret:

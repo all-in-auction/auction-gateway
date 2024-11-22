@@ -3,10 +3,14 @@ package jpabook.auctiongateway.config;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
 import org.springframework.security.config.web.server.SecurityWebFiltersOrder;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
 import org.springframework.security.web.server.SecurityWebFilterChain;
+import org.springframework.web.server.WebFilter;
+
+import java.net.URI;
 
 @Configuration
 @EnableWebFluxSecurity
@@ -30,6 +34,7 @@ public class SecurityConfig {
                                 "/api/v2/auctions/elasticsearch",
                                 "/actuator/health",
                                 "/health",
+                                "/",
                                 "/*/v3/api-docs/**",
                                 "/v3/api-docs/**",
                                 "/v3/api-docs",
@@ -47,5 +52,17 @@ public class SecurityConfig {
                 .formLogin(ServerHttpSecurity.FormLoginSpec::disable)
                 .csrf(ServerHttpSecurity.CsrfSpec::disable)
                 .build();
+    }
+
+    @Bean
+    public WebFilter redirectRootToSwagger() {
+        return (exchange, chain) -> {
+            if ("/".equals(exchange.getRequest().getPath().value())) {
+                exchange.getResponse().setStatusCode(HttpStatus.FOUND);
+                exchange.getResponse().getHeaders().setLocation(URI.create("/swagger-ui/index.html"));
+                return exchange.getResponse().setComplete();
+            }
+            return chain.filter(exchange);
+        };
     }
 }
